@@ -1,17 +1,18 @@
 const config = require("config");
 const express = require("express");
 const path = require("path");
+const registerRoute = require("./routes/register.route");
+const cors = require("cors");
 //////////////////////
 
 const app = express();
 const port = config.get("PORT");
 app.use(require("./middleware/body_parsers"));
-app.use(express.static(path.join(__dirname, "public")));
+// app.use(express.static(path.join(__dirname, "public")));
+
 ////////////////////// DEFINING ROUTES
 
-app.get("/", (req, res) => {
-  return res.sendFile(path.join(__dirname, "/view/landing-page.html"));
-});
+app.use("/register", registerRoute);
 
 ////////////////////// INITIALIZING SERVER
 
